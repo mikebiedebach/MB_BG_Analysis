@@ -1,9 +1,13 @@
-import math
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
-from matplotlib.dates import DateFormatter
-from matplotlib import ticker
-import seaborn as sns
-import matplotlib.dates as mdates
-import statistics
+
+def check_for_missing_columns(df_i, col_list):
+  '''
+  assigns null values to temp, humidty, dew point when HMP155 is turned off
+  '''
+  missing_cols = set(col_list).difference(set(df_i.columns.unique()))
+
+  for col in missing_cols:
+    df_i[col]=np.nan
+
+  return df_i
